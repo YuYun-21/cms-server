@@ -9,14 +9,12 @@ public class News {
     private String newsid;
     private String title;
     private String author;
-    private Short pbdate;
+    private Long pbdate;
     private String content;
 
     @Id
     @GeneratedValue(generator = "uuid2" )   //指定生成器名称
-    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator" )  //生成器名称，uuid生成类
-
-    @Basic
+    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator" )
     @Column(name = "newsid")
     public String getNewsid() {
         return newsid;
@@ -48,11 +46,11 @@ public class News {
 
     @Basic
     @Column(name = "pbdate")
-    public Short getPbdate() {
+    public Long getPbdate() {
         return pbdate;
     }
 
-    public void setPbdate(Short pbdate) {
+    public void setPbdate(Long pbdate) {
         this.pbdate = pbdate;
     }
 
