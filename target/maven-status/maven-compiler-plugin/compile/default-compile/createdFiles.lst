@@ -1,0 +1,15 @@
+edu\ynmd\cms\model\News.class
+edu\ynmd\cms\dao\MediaDao.class
+edu\ynmd\cms\action\AdminAction.class
+edu\ynmd\cms\config\JpaConfiguration.class
+edu\ynmd\cms\model\Media.class
+edu\ynmd\cms\service\impl\ManageServiceImpl.class
+edu\ynmd\cms\dao\CarouselDao.class
+edu\ynmd\cms\model\Carousel.class
+edu\ynmd\cms\service\ManageService.class
+edu\ynmd\cms\dao\SpDao.class
+edu\ynmd\cms\dao\NewsDao.class
+edu\ynmd\cms\action\PublicAction.class
+edu\ynmd\cms\config\DataSourceConfiguration.class
+edu\ynmd\cms\model\Singlepage.class
+edu\ynmd\cms\Main.class
