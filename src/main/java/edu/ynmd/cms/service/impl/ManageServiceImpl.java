@@ -1,17 +1,16 @@
 package edu.ynmd.cms.service.impl;
 
-import edu.ynmd.cms.dao.CarouselDao;
-import edu.ynmd.cms.dao.MediaDao;
-import edu.ynmd.cms.dao.NewsDao;
-import edu.ynmd.cms.dao.SpDao;
-import edu.ynmd.cms.model.Carousel;
-import edu.ynmd.cms.model.Media;
-import edu.ynmd.cms.model.News;
-import edu.ynmd.cms.model.Singlepage;
+import edu.ynmd.cms.dao.*;
+import edu.ynmd.cms.model.*;
 import edu.ynmd.cms.service.ManageService;
+import edu.ynmd.cms.tools.Tools;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +28,8 @@ public class ManageServiceImpl implements ManageService {
     @Autowired
     private MediaDao mediaDao;
 
+    @Autowired
+    private UsersDao usersDao;
 
     @Override
     public boolean deleteNews(String id) {
@@ -181,4 +182,69 @@ public class ManageServiceImpl implements ManageService {
         return mediaDao.getMediaByType(type);
     }
 
+    //获取当前登录用的的Id
+    @Override
+    public String getCurrentUserId() {
+        String userid= (String) SecurityContextHolder.getContext().getAuthentication() .getPrincipal();
+        if(Tools.isNullOrSpace(userid)){
+            return null;
+        }
+        else {
+            return userid;
+        }
+    }
+
+    //获取当前登录用户的角色
+    @Override
+    public String getCurrentRole() {
+        String role=null;
+        Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>)    SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+        for (GrantedAuthority authority : authorities) {
+            role = authority.getAuthority();
+
+        }
+
+        if(Tools.isNullOrSpace(role)){
+            return null;
+        }
+        else{
+            return role;
+        }
+    }
+
+    @Override
+    public Users saveUser(Users users) {
+        try {
+            return usersDao.save(users);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public boolean deleteUser(String id) {
+        try {
+            usersDao.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public Users getUser(String id) {
+        Optional<Users> temp=usersDao.findById(id);
+        return temp.isPresent()?temp.get():null;
+    }
+
+    @Override
+    public Users getUserByUserNameAndPass(String username, String pass) {
+        List<Users> ul=usersDao.getUsersByUsernameAndPass(username,pass);
+        if(ul.size()>0){
+            return ul.get(0);
+        }
+        return null;
+    }
 }

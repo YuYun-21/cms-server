@@ -1,13 +1,12 @@
 package edu.ynmd.cms.action;
 
-import edu.ynmd.cms.model.Carousel;
-import edu.ynmd.cms.model.Media;
-import edu.ynmd.cms.model.News;
-import edu.ynmd.cms.model.Singlepage;
+import edu.ynmd.cms.model.*;
 import edu.ynmd.cms.service.ManageService;
+import edu.ynmd.cms.tools.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -86,5 +85,37 @@ public class PublicAction {
         }
 
         return m;
+    }
+
+    @PostMapping("/login")
+    @ResponseBody
+    public HashMap<String,String> login(
+            @RequestBody Account account) throws IOException {
+        Users u=manageService.getUserByUserNameAndPass(account.username,account.password);
+//        if(account.username.equals("admin")&&account.password.equals("123456")){
+        if(u!=null){
+            //String jwt= JwtUtil.generateToken("admin","123456789abc");
+            String jwt= JwtUtil.generateToken(u.getRoleid(),u.getUsersid());
+
+
+            return new HashMap<String,String>(){{
+                put("msg","ok");
+                put("token",jwt);
+                put("role",u.getRoleid());
+                //put("role","admin");
+            }};
+        }
+        else {
+            //return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+            return new HashMap<String,String>(){{
+                put("msg","error");
+                put("token","error");
+            }};
+        }
+    }
+
+    public static class Account{
+        public String username;
+        public String password;
     }
 }

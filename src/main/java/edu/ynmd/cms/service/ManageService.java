@@ -1,9 +1,6 @@
 package edu.ynmd.cms.service;
 
-import edu.ynmd.cms.model.Carousel;
-import edu.ynmd.cms.model.Media;
-import edu.ynmd.cms.model.News;
-import edu.ynmd.cms.model.Singlepage;
+import edu.ynmd.cms.model.*;
 
 import java.util.List;
 
@@ -29,4 +26,14 @@ public interface ManageService {
     boolean updateMedia(Media media);
     Media getMedia(String id);
     List<Media> getMediaListByType(String type);
+
+
+    String getCurrentUserId();
+    String getCurrentRole();
+
+    //用户表
+    Users saveUser(Users users);
+    boolean deleteUser(String id);
+    Users getUser(String id);
+    Users getUserByUserNameAndPass(String username,String pass);
 }

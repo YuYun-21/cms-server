@@ -5,6 +5,7 @@ import edu.ynmd.cms.model.News;
 import edu.ynmd.cms.model.Singlepage;
 import edu.ynmd.cms.service.ManageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,9 +13,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
-@RequestMapping("/manage")
+//@RequestMapping("/manage")
+//@CrossOrigin
+//@RestController
 @CrossOrigin
 @RestController
+@PreAuthorize("hasAuthority('admin')") //配置角色，拥有该角色的用户方可访问
+@RequestMapping("/manage")
 public class AdminAction {
     @Autowired
     private ManageService manageService;
@@ -151,6 +156,17 @@ public class AdminAction {
             m.put("msg","error");
         }
         return m;
+    }
+
+    @GetMapping("testSecurityResource")
+    @ResponseBody
+    public String testSecurityResource() throws Exception{
+
+        String userid=manageService.getCurrentUserId();
+        String role=manageService.getCurrentRole();
+
+        return "受保护的资源,当前用户的id是"+userid+"当前用户的角色是"+role;
+
     }
 
 
