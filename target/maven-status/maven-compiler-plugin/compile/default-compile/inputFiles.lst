@@ -1,15 +1,27 @@
-D:\IntelliJ IDEA 2017.2.7\IdeaProjects\cms\src\main\java\edu\ynmd\cms\config\JpaConfiguration.java
-D:\IntelliJ IDEA 2017.2.7\IdeaProjects\cms\src\main\java\edu\ynmd\cms\dao\CarouselDao.java
-D:\IntelliJ IDEA 2017.2.7\IdeaProjects\cms\src\main\java\edu\ynmd\cms\Main.java
-D:\IntelliJ IDEA 2017.2.7\IdeaProjects\cms\src\main\java\edu\ynmd\cms\action\PublicAction.java
-D:\IntelliJ IDEA 2017.2.7\IdeaProjects\cms\src\main\java\edu\ynmd\cms\dao\SpDao.java
-D:\IntelliJ IDEA 2017.2.7\IdeaProjects\cms\src\main\java\edu\ynmd\cms\config\DataSourceConfiguration.java
-D:\IntelliJ IDEA 2017.2.7\IdeaProjects\cms\src\main\java\edu\ynmd\cms\model\Media.java
-D:\IntelliJ IDEA 2017.2.7\IdeaProjects\cms\src\main\java\edu\ynmd\cms\action\AdminAction.java
-D:\IntelliJ IDEA 2017.2.7\IdeaProjects\cms\src\main\java\edu\ynmd\cms\model\News.java
-D:\IntelliJ IDEA 2017.2.7\IdeaProjects\cms\src\main\java\edu\ynmd\cms\model\Carousel.java
-D:\IntelliJ IDEA 2017.2.7\IdeaProjects\cms\src\main\java\edu\ynmd\cms\service\ManageService.java
-D:\IntelliJ IDEA 2017.2.7\IdeaProjects\cms\src\main\java\edu\ynmd\cms\dao\MediaDao.java
-D:\IntelliJ IDEA 2017.2.7\IdeaProjects\cms\src\main\java\edu\ynmd\cms\model\Singlepage.java
-D:\IntelliJ IDEA 2017.2.7\IdeaProjects\cms\src\main\java\edu\ynmd\cms\dao\NewsDao.java
-D:\IntelliJ IDEA 2017.2.7\IdeaProjects\cms\src\main\java\edu\ynmd\cms\service\impl\ManageServiceImpl.java
+E:\IdeaProjects\cms\src\main\java\edu\ynmd\cms\action\MemberAction.java
+E:\IdeaProjects\cms\src\main\java\edu\ynmd\cms\dao\CarouselDao.java
+E:\IdeaProjects\cms\src\main\java\edu\ynmd\cms\model\Singlepage.java
+E:\IdeaProjects\cms\src\main\java\edu\ynmd\cms\model\Users.java
+E:\IdeaProjects\cms\src\main\java\edu\ynmd\cms\vo\PageParmVo.java
+E:\IdeaProjects\cms\src\main\java\edu\ynmd\cms\service\ManageService.java
+E:\IdeaProjects\cms\src\main\java\edu\ynmd\cms\model\Myfriend.java
+E:\IdeaProjects\cms\src\main\java\edu\ynmd\cms\dao\MyfriendDao.java
+E:\IdeaProjects\cms\src\main\java\edu\ynmd\cms\model\Media.java
+E:\IdeaProjects\cms\src\main\java\edu\ynmd\cms\tools\BaseImgTools.java
+E:\IdeaProjects\cms\src\main\java\edu\ynmd\cms\config\JpaConfiguration.java
+E:\IdeaProjects\cms\src\main\java\edu\ynmd\cms\model\News.java
+E:\IdeaProjects\cms\src\main\java\edu\ynmd\cms\action\AdminAction.java
+E:\IdeaProjects\cms\src\main\java\edu\ynmd\cms\action\AuthAction.java
+E:\IdeaProjects\cms\src\main\java\edu\ynmd\cms\config\DataSourceConfiguration.java
+E:\IdeaProjects\cms\src\main\java\edu\ynmd\cms\Main.java
+E:\IdeaProjects\cms\src\main\java\edu\ynmd\cms\config\WebSecurityConfig.java
+E:\IdeaProjects\cms\src\main\java\edu\ynmd\cms\dao\UsersDao.java
+E:\IdeaProjects\cms\src\main\java\edu\ynmd\cms\action\PublicAction.java
+E:\IdeaProjects\cms\src\main\java\edu\ynmd\cms\tools\Tools.java
+E:\IdeaProjects\cms\src\main\java\edu\ynmd\cms\dao\MediaDao.java
+E:\IdeaProjects\cms\src\main\java\edu\ynmd\cms\tools\JwtUtil.java
+E:\IdeaProjects\cms\src\main\java\edu\ynmd\cms\filter\JwtAuthenticationFilter.java
+E:\IdeaProjects\cms\src\main\java\edu\ynmd\cms\service\impl\ManageServiceImpl.java
+E:\IdeaProjects\cms\src\main\java\edu\ynmd\cms\dao\NewsDao.java
+E:\IdeaProjects\cms\src\main\java\edu\ynmd\cms\dao\SpDao.java
+E:\IdeaProjects\cms\src\main\java\edu\ynmd\cms\model\Carousel.java

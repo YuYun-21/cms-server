@@ -2,11 +2,15 @@ package edu.ynmd.cms.action;
 
 import edu.ynmd.cms.model.*;
 import edu.ynmd.cms.service.ManageService;
+import edu.ynmd.cms.tools.BaseImgTools;
 import edu.ynmd.cms.tools.JwtUtil;
+import edu.ynmd.cms.vo.PageParmVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 
@@ -38,6 +42,24 @@ public class PublicAction {
         return manageService.getSinglePageList();
     }
 
+    @PostMapping("getNewsListByPage")
+    @ResponseBody
+    public HashMap getNewsListByPage(@RequestBody PageParmVo pageParmVo) throws Exception{
+
+        HashMap m=new HashMap();
+
+        Page<News> newspage= null;
+        try {
+            newspage = manageService.getNewsList(pageParmVo.getPage(),pageParmVo.getPagesize());
+            m.put("msg","ok");
+            m.put("obj",newspage);
+        } catch (Exception e) {
+            e.printStackTrace();
+            m.put("msg","error");
+        }
+        return m;
+    }
+
     @PostMapping("getSinglePageById")
     @ResponseBody
     public Singlepage getSinglePageById(@RequestBody Singlepage singlepage) throws Exception{
@@ -54,6 +76,12 @@ public class PublicAction {
     @ResponseBody
     public List<Media> getMediaListByType(@RequestBody Media media) throws Exception{
         return manageService.getMediaListByType(media.getType());
+    }
+
+    @PostMapping("getMediaListById")
+    @ResponseBody
+    public  Media getMediaListById(@RequestBody Media media) throws Exception{
+        return manageService.getMedia(media.getMediaid());
     }
 
     @GetMapping("getCarouselListMap")
@@ -118,4 +146,130 @@ public class PublicAction {
         public String username;
         public String password;
     }
+
+    @GetMapping("createDemoData")
+    @ResponseBody
+    public HashMap createDemoData() throws Exception{
+
+        HashMap m=new HashMap();
+
+        try {
+            for(int i=0;i<100;i++){
+                News n=new News();
+                n.setTitle("测试数据标题"+1);
+                n.setAuthor("测试作者"+i);
+                n.setPbdate(System.currentTimeMillis());
+                n.setContent("测试内容"+i);
+                manageService.saveNews(n);
+            }
+            m.put("msg","ok");
+        } catch (Exception e) {
+            e.printStackTrace();
+            m.put("msg","error");
+        }
+        return m;
+    }
+
+    @PostMapping("saveUser")
+    @ResponseBody
+    public HashMap saveUser(@RequestBody Users users) throws Exception{
+        HashMap m=new HashMap();
+
+        try {
+            users.setRoleid("member");
+
+            manageService.saveUser(users);
+            m.put("msg","ok");
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            m.put("msg","error");
+        }
+
+
+        return m;
+    }
+
+    @PostMapping("saveMyFrinds")
+    @ResponseBody
+    public HashMap saveMyFrinds(@RequestBody Myfriend myfriend) throws Exception{
+        HashMap m=new HashMap();
+        myfriend.setPbtime(new Timestamp(System.currentTimeMillis()).getTime());
+
+
+        try {
+            manageService.saveMyfriend(myfriend);
+            m.put("msg","ok");
+        } catch (Exception e) {
+            e.printStackTrace();
+            m.put("msg","error");
+        }
+
+
+        return m;
+    }
+
+    @PostMapping("deteMyFriends")
+    @ResponseBody
+    public HashMap deleteMyFriends(@RequestBody Myfriend myfriend) throws Exception{
+
+        HashMap m=new HashMap();
+
+        try {
+            manageService.deleteMyFriends(myfriend.getMyfriendid());
+            m.put("msg","ok");
+        } catch (Exception e) {
+            e.printStackTrace();
+            m.put("msg","error");
+        }
+
+        return m;
+    }
+
+
+    @PostMapping("getSingleMyFriends")
+    @ResponseBody
+    public HashMap getSingleMyFriends(@RequestBody Myfriend myfriend) throws Exception{
+
+        HashMap m=new HashMap();
+
+        Myfriend temp=  manageService.getMyfrindById(myfriend.getMyfriendid());
+        if(temp!=null){
+            m.put("msg","ok");
+            m.put("obj",temp);
+
+            //朋友圈图片地址
+//            String imagepath="E:\\upload\\";
+            String imagepath="/usr/server/cms/uploadfiles/myfriend/";
+
+            String[] picbase=temp.getPic().split(",");
+            BaseImgTools.saveImgByStr(imagepath+temp.getMyfriendid()+".jpg",picbase[1]);
+
+        }
+        else {
+            m.put("msg","empty");
+        }
+
+
+        return m;
+    }
+
+
+    @GetMapping("getLatestMyFriends")
+    @ResponseBody
+    public HashMap getLatestMyFriends() throws Exception{
+        HashMap m=new HashMap();
+        List<Myfriend> fl=manageService.getLatestMyFrinds();
+
+        if(fl.size()>0){
+            m.put("msg","ok");
+            m.put("list",fl);
+        }
+        else{
+            m.put("msg","empty");
+        }
+        return m;
+
+    }
+
 }

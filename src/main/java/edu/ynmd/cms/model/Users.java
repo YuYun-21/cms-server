@@ -10,6 +10,10 @@ public class Users {
     private String pass;
     private String roleid;
     private String username;
+    private String cellphone;
+    private String nickname;
+    private String icon;
+    private String sex;
 
     @Id
     @GeneratedValue(generator = "uuid2" )   //指定生成器名称
@@ -75,5 +79,45 @@ public class Users {
         result = 31 * result + (roleid != null ? roleid.hashCode() : 0);
         result = 31 * result + (username != null ? username.hashCode() : 0);
         return result;
+    }
+
+    @Basic
+    @Column(name = "cellphone")
+    public String getCellphone() {
+        return cellphone;
+    }
+
+    public void setCellphone(String cellphone) {
+        this.cellphone = cellphone;
+    }
+
+    @Basic
+    @Column(name = "nickname")
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    @Basic
+    @Column(name = "icon")
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    @Basic
+    @Column(name = "sex")
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 }

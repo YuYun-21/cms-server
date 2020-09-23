@@ -16,11 +16,13 @@ import java.util.HashMap;
 //@RequestMapping("/manage")
 //@CrossOrigin
 //@RestController
+
 @CrossOrigin
 @RestController
 @PreAuthorize("hasAuthority('admin')") //配置角色，拥有该角色的用户方可访问
 @RequestMapping("/manage")
 public class AdminAction {
+
     @Autowired
     private ManageService manageService;
 
@@ -40,13 +42,17 @@ public class AdminAction {
             e.printStackTrace();
             m.put("msg","error");
         }
+
+
         return m;
+
     }
 
     @PostMapping("deleteNews")
     @ResponseBody
     public HashMap deleteNews(@RequestBody News news) throws Exception{
         HashMap m=new HashMap();
+
 
         try {
             manageService.deleteNews(news.getNewsid());
@@ -55,8 +61,10 @@ public class AdminAction {
             e.printStackTrace();
             m.put("msg","error");
         }
+
         return m;
     }
+
 
     //图片上传
     @PostMapping("uploadPic")
@@ -69,8 +77,9 @@ public class AdminAction {
 
         finename=String.valueOf(System.currentTimeMillis())+suffixname;
 
-//        String filepath="d:/springbootupload/";
-        String filepath="/usr/server/cms/uploadfiles/";
+//        String filepath="e:/springbootupload/";
+       String filepath="/usr/server/cms/uploadfiles/";
+
 
         File tf=new File(filepath);
         if(!tf.exists()){
@@ -89,9 +98,9 @@ public class AdminAction {
             e.printStackTrace();
             m.put("msg","illeageerror");
         }
-
         return m;
     }
+
 
     @PostMapping("saveCarousel")
     @ResponseBody
@@ -109,6 +118,7 @@ public class AdminAction {
         return m;
     }
 
+
     @PostMapping("deleteCarousel")
     @ResponseBody
     public HashMap deleteCarousel(@RequestBody Carousel carousel) throws Exception{
@@ -122,8 +132,10 @@ public class AdminAction {
             m.put("msg","error");
         }
 
+
         return m;
     }
+
 
     @PostMapping("saveSinglePage")
     @ResponseBody
@@ -155,8 +167,11 @@ public class AdminAction {
             e.printStackTrace();
             m.put("msg","error");
         }
+
+
         return m;
     }
+
 
     @GetMapping("testSecurityResource")
     @ResponseBody
@@ -168,6 +183,4 @@ public class AdminAction {
         return "受保护的资源,当前用户的id是"+userid+"当前用户的角色是"+role;
 
     }
-
-
 }

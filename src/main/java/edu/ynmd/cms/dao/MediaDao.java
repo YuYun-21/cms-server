@@ -12,4 +12,6 @@ public interface MediaDao extends JpaRepository<Media,String> {
     @Query("select m from Media m where m.type=:mtype")
     List<Media> getMediaByType(@Param("mtype") String type);
 
+    @Query("select m from Media m order by m.mediaid desc ")
+    List<Media> getAll();
 }

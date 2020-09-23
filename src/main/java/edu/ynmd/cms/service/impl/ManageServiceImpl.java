@@ -5,6 +5,8 @@ import edu.ynmd.cms.model.*;
 import edu.ynmd.cms.service.ManageService;
 import edu.ynmd.cms.tools.Tools;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,6 +32,9 @@ public class ManageServiceImpl implements ManageService {
 
     @Autowired
     private UsersDao usersDao;
+
+    @Autowired
+    private MyfriendDao myfriendDao;
 
     @Override
     public boolean deleteNews(String id) {
@@ -68,7 +73,12 @@ public class ManageServiceImpl implements ManageService {
 
     @Override
     public List<News> getNewsList() {
-        return newsDao.findAll();
+        return newsDao.getAll();
+    }
+
+    @Override
+    public Page<News> getNewsList(int start, int pagesize) {
+        return newsDao.getNewsForPage(PageRequest.of(start,pagesize));
     }
 
     @Override
@@ -212,6 +222,8 @@ public class ManageServiceImpl implements ManageService {
         }
     }
 
+
+    //用户表增删查改
     @Override
     public Users saveUser(Users users) {
         try {
@@ -239,6 +251,7 @@ public class ManageServiceImpl implements ManageService {
         return temp.isPresent()?temp.get():null;
     }
 
+
     @Override
     public Users getUserByUserNameAndPass(String username, String pass) {
         List<Users> ul=usersDao.getUsersByUsernameAndPass(username,pass);
@@ -246,5 +259,33 @@ public class ManageServiceImpl implements ManageService {
             return ul.get(0);
         }
         return null;
+    }
+
+    @Override
+    public Myfriend saveMyfriend(Myfriend myfriend) {
+        return myfriendDao.save(myfriend);
+    }
+
+    @Override
+    public boolean deleteMyFriends(String id) {
+        try {
+            myfriendDao.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public Myfriend getMyfrindById(String id) {
+        Optional<Myfriend> temp=myfriendDao.findById(id);
+
+        return temp.isPresent()?temp.get():null;
+    }
+
+    @Override
+    public List<Myfriend> getLatestMyFrinds() {
+        return myfriendDao.getlatestMyfrindlist();
     }
 }

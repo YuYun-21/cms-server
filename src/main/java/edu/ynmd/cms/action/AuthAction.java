@@ -15,7 +15,8 @@ import java.util.HashMap;
 //令牌环更新
 @CrossOrigin
 @RestController
-@PreAuthorize("hasAuthority('admin')")
+//@PreAuthorize("hasAuthority('admin')")//只允许有admin角色的用户访问 hasAnyAuthority([auth1,auth2])
+@PreAuthorize("hasAnyAuthority('admin','member')")
 @RequestMapping("/auth")
 public class AuthAction {
     //更新令牌环信息
